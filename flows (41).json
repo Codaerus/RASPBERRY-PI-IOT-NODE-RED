@@ -1,0 +1,339 @@
+[
+    {
+        "id": "3cf610c41c3bff56",
+        "type": "inject",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hola",
+        "payloadType": "str",
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "056af655ef87504b"
+            ]
+        ]
+    },
+    {
+        "id": "056af655ef87504b",
+        "type": "debug",
+        "z": "d35cb2edac1363c4",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "87bda7ab5d7f500d",
+        "type": "rpi-gpio out",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "pin": "21",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 480,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3721b0177554abfc",
+        "type": "inject",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "87bda7ab5d7f500d"
+            ]
+        ]
+    },
+    {
+        "id": "cc52315554974691",
+        "type": "inject",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "87bda7ab5d7f500d"
+            ]
+        ]
+    },
+    {
+        "id": "07e29f155d18e3d4",
+        "type": "ui_button",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "group": "90a5870307ca6e36",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "ENCENDER",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "87bda7ab5d7f500d"
+            ]
+        ]
+    },
+    {
+        "id": "2069475270402576",
+        "type": "ui_button",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "group": "90a5870307ca6e36",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "APAGAR",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "87bda7ab5d7f500d"
+            ]
+        ]
+    },
+    {
+        "id": "5a6d9b27f0e4a631",
+        "type": "ui_switch",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "label": "CONTROL LED",
+        "tooltip": "",
+        "group": "90a5870307ca6e36",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 280,
+        "y": 420,
+        "wires": [
+            [
+                "87bda7ab5d7f500d"
+            ]
+        ]
+    },
+    {
+        "id": "573b71d8c550ece6",
+        "type": "ui_template",
+        "z": "d35cb2edac1363c4",
+        "group": "4be7d526bad1113a",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3901.6323450666796!2d-77.03950628970132!3d-12.068797988120393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDA0JzA3LjciUyA3N8KwMDInMTIuOSJX!5e0!3m2!1ses-419!2spe!4v1733586204318!5m2!1ses-419!2spe\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 480,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85e68284376abfcb",
+        "type": "ui_gauge",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "group": "90a5870307ca6e36",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 430,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5438ba93074f3d48",
+        "type": "ui_slider",
+        "z": "d35cb2edac1363c4",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "90a5870307ca6e36",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "85e68284376abfcb",
+                "275d07862e9ef732"
+            ]
+        ]
+    },
+    {
+        "id": "275d07862e9ef732",
+        "type": "ui_text",
+        "z": "d35cb2edac1363c4",
+        "group": "90a5870307ca6e36",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 430,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "90a5870307ca6e36",
+        "type": "ui_group",
+        "name": "SENSORES",
+        "tab": "2f20f8e97ccd6198",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4be7d526bad1113a",
+        "type": "ui_group",
+        "name": "MAPA",
+        "tab": "2f20f8e97ccd6198",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2f20f8e97ccd6198",
+        "type": "ui_tab",
+        "name": "MONITOREO",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
