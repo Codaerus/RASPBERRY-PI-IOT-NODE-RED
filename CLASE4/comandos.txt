@@ -1,0 +1,28 @@
+sudo apt-get install apache2
+
+sudo apt install php
+sudo apt install mariadb-server php-mysql
+
+sudo mysql-secure-installation
+
+1. dar enter sin passw
+2. Puede preguntar si quieres establecer un passw
+3. pones nuevo pass Raspi@2022#1
+4. remover usuarios anonimos SI
+5. desallow root login remotely? no
+6. Remove text database and access to it? SI
+7. Reload privilege tables now? SI
+
+Luego configurar seguridad
+
+sudo mysql --user=root --password
+
+Maria DB [(none)]> create user admin@'%' identified by 'Raspi@2022#1';
+privilegios
+Maria DB [(none)]> grant all privileges on *.* to admin@'%';
+Maria DB [(none)]> FLUSH PRIVILEGES;
+Maria DB [(none)]> exit;
+
+sudo apt install phpmyadmin
+sudo phpenmod mysqli
+sudo service apache2 restart
