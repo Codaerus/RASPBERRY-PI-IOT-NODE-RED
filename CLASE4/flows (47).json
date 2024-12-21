@@ -1,0 +1,325 @@
+[
+    {
+        "id": "603123e02daad117",
+        "type": "mysql",
+        "z": "4560369ac5d68c39",
+        "mydb": "92efecb14aa57cb0",
+        "name": "",
+        "x": 1040,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a6b610c193b8976e",
+        "type": "function",
+        "z": "4560369ac5d68c39",
+        "name": "function 3",
+        "func": "let humedad = msg.payload.split(\",\")[0];\nlet temperatura = msg.payload.split(\",\")[1];\n\nlet s = \"INSERT INTO sensores (id,tiempo,humedad,temperatura)\";\ns = s + \" VALUES (NULL, current_timestamp(),\" + humedad + \",\" + temperatura + \");\";\nmsg.topic = s;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 300,
+        "wires": [
+            [
+                "603123e02daad117"
+            ]
+        ]
+    },
+    {
+        "id": "f3fb6b4c18023d9c",
+        "type": "inject",
+        "z": "4560369ac5d68c39",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "82,20",
+        "payloadType": "str",
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "6d542c27f35ac0d5",
+                "a6b610c193b8976e"
+            ]
+        ]
+    },
+    {
+        "id": "6d542c27f35ac0d5",
+        "type": "debug",
+        "z": "4560369ac5d68c39",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9adb3ed77123bda9",
+        "type": "mqtt in",
+        "z": "4560369ac5d68c39",
+        "name": "",
+        "topic": "canalx",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f7af31880b452af2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "6d542c27f35ac0d5",
+                "a6b610c193b8976e"
+            ]
+        ]
+    },
+    {
+        "id": "769441b3e648b943",
+        "type": "mysql",
+        "z": "4560369ac5d68c39",
+        "mydb": "92efecb14aa57cb0",
+        "name": "",
+        "x": 860,
+        "y": 440,
+        "wires": [
+            [
+                "46070fe6a625bba0",
+                "1fd4fa1a9ff4fcd5",
+                "cb6e0a4420595ca0"
+            ]
+        ]
+    },
+    {
+        "id": "4dc776de2288e8ba",
+        "type": "inject",
+        "z": "4560369ac5d68c39",
+        "name": "",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 660,
+        "y": 420,
+        "wires": [
+            [
+                "2aac62c4870bdfb0"
+            ]
+        ]
+    },
+    {
+        "id": "2aac62c4870bdfb0",
+        "type": "function",
+        "z": "4560369ac5d68c39",
+        "name": "consulta",
+        "func": "msg.topic = \"SELECT * FROM sensores ORDER BY id DESC LIMIT 1\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 500,
+        "wires": [
+            [
+                "769441b3e648b943"
+            ]
+        ]
+    },
+    {
+        "id": "46070fe6a625bba0",
+        "type": "debug",
+        "z": "4560369ac5d68c39",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "28af7268a9de4375",
+        "type": "ui_gauge",
+        "z": "4560369ac5d68c39",
+        "name": "",
+        "group": "90a5870307ca6e36",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1190,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1fd4fa1a9ff4fcd5",
+        "type": "function",
+        "z": "4560369ac5d68c39",
+        "name": "humedad",
+        "func": "msg.payload = msg.payload[0].humedad;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 440,
+        "wires": [
+            [
+                "28af7268a9de4375"
+            ]
+        ]
+    },
+    {
+        "id": "46ed18b7e068fdfb",
+        "type": "ui_gauge",
+        "z": "4560369ac5d68c39",
+        "name": "",
+        "group": "90a5870307ca6e36",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1210,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "cb6e0a4420595ca0",
+        "type": "function",
+        "z": "4560369ac5d68c39",
+        "name": "temperatura",
+        "func": "msg.payload = msg.payload[0].temperatura;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 500,
+        "wires": [
+            [
+                "46ed18b7e068fdfb"
+            ]
+        ]
+    },
+    {
+        "id": "92efecb14aa57cb0",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "MONITOREO",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "f7af31880b452af2",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "90a5870307ca6e36",
+        "type": "ui_group",
+        "name": "SENSORES",
+        "tab": "2f20f8e97ccd6198",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2f20f8e97ccd6198",
+        "type": "ui_tab",
+        "name": "MONITOREO",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
