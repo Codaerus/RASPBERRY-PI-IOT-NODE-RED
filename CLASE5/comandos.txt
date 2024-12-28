@@ -1,0 +1,28 @@
+##############################################PAQUETES Y DEPENDENCIAS#############################################
+sudo apt update
+sudo apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev
+
+##################################################INSTALA PIP######################################################
+curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
+sudo python3 get-pip.py
+rm get-pip.py
+
+#############################################Para Bookworm 64 bits##################################################
+
+grep -q '\[global\]' /etc/pip.conf 2> /dev/null || printf '%b' '[global]\n' | sudo tee -a /etc/pip.conf > /dev/null
+sudo sed -i '/^\[global\]/a\break-system-packages=true' /etc/pip.conf
+
+#############################################Para Bookworm 32 bits##################################################
+
+grep -q '\[global\]' /etc/pip.conf 2> /dev/null || printf '%b' '[global]\n' | sudo tee -a /etc/pip.conf > /dev/null
+sudo sed -i '/^\[global\]/a\extra-index-url=https://www.piwheels.org/simple/' /etc/pip.conf
+
+#################################################OPCIONAL##########################################################
+Crear un entorno virtual
+
+python3 -m venv myenv
+source myenv/bin/activate
+deactivate
+###################################################################################################################
+sudo python3 -m pip install --pre motioneye
+sudo motioneye_init
